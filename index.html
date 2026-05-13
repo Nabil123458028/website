@@ -3,84 +3,104 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 .wha{font-family:'Barlow',sans-serif;color:#d0c8ba;width:100%}
-.wha-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 22px 10px;background:#0d1f30;border-bottom:1px solid rgba(255,255,255,0.07);gap:14px}
-.wha-t1{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:900;letter-spacing:3px;color:#fff;line-height:1}
-.wha-t2{font-size:10px;color:rgba(200,220,240,0.35);margin-top:4px;font-weight:300;max-width:460px;line-height:1.55}
-.wha-bdg{display:flex;gap:5px;flex-shrink:0;align-items:flex-start;margin-top:2px}
-.wha-b{border:1px solid #2a8080;color:#4fd4ce;padding:2px 7px;font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;letter-spacing:1.5px;white-space:nowrap}
-.wha-mwrap{position:relative;overflow:hidden;background:#1a4060;cursor:grab}
-.wha-mwrap:active{cursor:grabbing}
-#wha-svg{display:block;width:100%}
+
+/* HEADER */
+.wha-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 20px 10px;background:#0d1f30;border-bottom:1px solid rgba(255,255,255,0.07);gap:12px;flex-wrap:wrap}
+.wha-t1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(18px,4vw,28px);font-weight:900;letter-spacing:clamp(1px,0.5vw,3px);color:#fff;line-height:1}
+.wha-t2{font-size:clamp(9px,1.8vw,10.5px);color:rgba(200,220,240,0.32);margin-top:4px;font-weight:300;line-height:1.5}
+.wha-bdg{display:flex;gap:4px;flex-shrink:0;align-items:flex-start;flex-wrap:wrap}
+.wha-b{border:1px solid #2a8080;color:#4fd4ce;padding:2px 6px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(7px,1.5vw,8px);font-weight:700;letter-spacing:1px;white-space:nowrap}
+
+/* HINT BAR */
+.hint-bar{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:clamp(7.5px,1.8vw,8.5px);letter-spacing:0.8px;color:rgba(255,255,255,0.2);padding:3px 8px;background:#0d1f30;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.4}
+
+/* MAP */
+.wha-mwrap{position:relative;overflow:hidden;background:#1a4060;touch-action:none}
+#wha-svg{display:block;width:100%;user-select:none;-webkit-user-select:none}
 #wha-load{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;color:#4fd4ce;pointer-events:none}
 @keyframes rf{to{stroke-dashoffset:-22}}
 .wh-rt{fill:none;stroke-linecap:round;stroke-dasharray:7 13;animation:rf 3.2s linear infinite;cursor:crosshair}
 .wh-gl{fill:none;stroke-linecap:round;pointer-events:none}
 
-/* Zoom controls */
+/* ZOOM BUTTONS */
 .zoom-controls{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:3px}
-.zoom-btn{width:26px;height:26px;background:rgba(8,20,35,0.88);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:16px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:300;transition:all 0.15s;user-select:none}
-.zoom-btn:hover{background:rgba(30,85,80,0.9);border-color:#4fd4ce;color:#4fd4ce}
-.zoom-level{width:26px;height:18px;background:rgba(8,20,35,0.75);border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);font-size:7.5px;letter-spacing:0.5px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;pointer-events:none}
+.zoom-btn{width:clamp(30px,7vw,34px);height:clamp(30px,7vw,34px);background:rgba(8,20,35,0.88);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:300;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
+.zoom-btn:hover,.zoom-btn:active{background:rgba(30,85,80,0.9);border-color:#4fd4ce;color:#4fd4ce}
+.zoom-level{width:clamp(30px,7vw,34px);height:16px;background:rgba(8,20,35,0.75);border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);font-size:7px;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;pointer-events:none}
 
-.wha-ctrl{padding:8px 16px;background:#0d1f30;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:6px}
-.wha-cr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.wha-cl{font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;color:#4a6070;width:85px;flex-shrink:0}
-.wha-bs{display:flex;gap:2.5px;flex-wrap:wrap}
-.wha-mb{background:transparent;border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.3);padding:2px 6px;font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.15s;line-height:1.65}
-.wha-mb:hover{border-color:rgba(255,255,255,0.22);color:rgba(255,255,255,0.6)}
+/* LEGEND */
+.wha-leg{position:absolute;bottom:8px;left:8px;background:rgba(8,20,35,0.88);border:1px solid rgba(255,255,255,0.07);padding:6px 8px}
+.wha-lt{font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;color:#4a6070;margin-bottom:4px}
+.wha-lr{display:flex;align-items:center;gap:5px;margin-bottom:2.5px;font-size:7px;color:#4a6070;font-family:'Barlow Condensed',sans-serif}
+
+/* TOOLTIP */
+#wha-tip{position:absolute;background:rgba(5,14,26,0.96);border:1px solid rgba(255,255,255,0.1);padding:6px 9px;font-size:9px;pointer-events:none;z-index:50;max-width:170px;display:none;font-family:'Barlow',sans-serif;line-height:1.45;color:#948c7e}
+
+/* CONTROLS */
+.wha-ctrl{padding:7px 12px;background:#0d1f30;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:5px}
+.wha-cr{display:flex;align-items:flex-start;gap:6px}
+.wha-cl{font-family:'Barlow Condensed',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:1.5px;color:#4a6070;width:72px;flex-shrink:0;padding-top:4px}
+.wha-bs{display:flex;gap:2px;flex-wrap:wrap}
+.wha-mb{background:transparent;border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.3);padding:3px 6px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(8px,2vw,8.5px);font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.15s;line-height:1.5;-webkit-tap-highlight-color:transparent;min-height:26px;display:flex;align-items:center}
+.wha-mb:hover,.wha-mb:active{border-color:rgba(255,255,255,0.22);color:rgba(255,255,255,0.6)}
 .wha-mb.a{background:#1a5555;border-color:#4fd4ce;color:#4fd4ce}
-.wha-sb{border:1.5px solid;padding:2px 8px;font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:opacity 0.2s;background:transparent;color:white;line-height:1.65}
+.wha-sb{border:1.5px solid;padding:3px 7px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(7.5px,1.8vw,8.5px);font-weight:700;letter-spacing:0.4px;cursor:pointer;transition:opacity 0.2s;background:transparent;color:white;line-height:1.5;-webkit-tap-highlight-color:transparent;min-height:26px;display:flex;align-items:center}
 .wha-sb.mx{opacity:0.15}
-.wha-cards{display:flex;overflow-x:auto;background:#0a1825;border-top:1px solid rgba(255,255,255,0.05);scrollbar-width:thin;scrollbar-color:rgba(79,212,206,0.12) transparent}
-.wha-card{flex:0 0 165px;padding:10px 12px;border-right:1px solid rgba(255,255,255,0.05);transition:background 0.2s}
+
+/* SPECIES CARDS */
+.wha-cards{display:flex;overflow-x:auto;background:#0a1825;border-top:1px solid rgba(255,255,255,0.05);scrollbar-width:thin;scrollbar-color:rgba(79,212,206,0.12) transparent;-webkit-overflow-scrolling:touch}
+.wha-card{flex:0 0 clamp(140px,38vw,165px);padding:9px 11px;border-right:1px solid rgba(255,255,255,0.05);transition:background 0.2s}
 .wha-card:hover{background:rgba(255,255,255,0.015)}
-.wha-ct{display:flex;gap:7px;margin-bottom:7px;align-items:flex-start}
-.wha-cb{width:3px;border-radius:2px;flex-shrink:0;height:34px;margin-top:1px}
-.wha-cn{font-family:'Barlow Condensed',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.3px;color:#ddd3c3;line-height:1.2}
-.wha-cs{font-style:italic;font-size:8px;color:#3a5065;margin-top:2px;line-height:1.25}
-.wha-st{font-size:8px;display:flex;flex-direction:column;gap:2px}
+.wha-ct{display:flex;gap:7px;margin-bottom:6px;align-items:flex-start}
+.wha-cb{width:3px;border-radius:2px;flex-shrink:0;height:30px;margin-top:1px}
+.wha-cn{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,2.5vw,11.5px);font-weight:700;letter-spacing:0.3px;color:#ddd3c3;line-height:1.2}
+.wha-cs{font-style:italic;font-size:clamp(7px,1.8vw,8px);color:#3a5065;margin-top:2px;line-height:1.2}
+.wha-st{font-size:clamp(7px,1.8vw,8px);display:flex;flex-direction:column;gap:2px}
 .wha-sr{display:flex;justify-content:space-between;gap:3px}
 .wha-sk{color:#3a5065}
 .wha-sv{color:#a0988a;font-weight:500;text-align:right}
-.wha-iu{display:inline-block;padding:1px 4px;font-size:6.5px;font-weight:700;letter-spacing:0.8px;margin-top:4px;border-radius:1px}
+.wha-iu{display:inline-block;padding:1px 4px;font-size:6px;font-weight:700;letter-spacing:0.8px;margin-top:3px;border-radius:1px}
 .iu-lc{background:rgba(39,89,35,0.65);color:#7ec86a;border:1px solid rgba(126,200,106,0.25)}
 .iu-vu{background:rgba(74,53,0,0.65);color:#f0a030;border:1px solid rgba(240,160,48,0.25)}
 .iu-en{background:rgba(92,21,0,0.65);color:#ff6040;border:1px solid rgba(255,96,64,0.25)}
 .iu-cr{background:rgba(80,0,0,0.65);color:#ff3030;border:1px solid rgba(255,48,48,0.25)}
-.wha-leg{position:absolute;bottom:10px;left:10px;background:rgba(8,20,35,0.88);border:1px solid rgba(255,255,255,0.07);padding:7px 9px}
-.wha-lt{font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;color:#4a6070;margin-bottom:5px}
-.wha-lr{display:flex;align-items:center;gap:5px;margin-bottom:3px;font-size:7.5px;color:#4a6070;font-family:'Barlow Condensed',sans-serif}
-#wha-tip{position:absolute;background:rgba(5,14,26,0.96);border:1px solid rgba(255,255,255,0.1);padding:7px 10px;font-size:9.5px;pointer-events:none;z-index:50;max-width:195px;display:none;font-family:'Barlow',sans-serif;line-height:1.5;color:#948c7e}
-.hint-bar{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:8.5px;letter-spacing:1px;color:rgba(255,255,255,0.18);padding:3px 0;background:#0d1f30;border-bottom:1px solid rgba(255,255,255,0.04)}
+
+/* MOBILE OVERRIDES */
+@media (max-width:480px){
+  .wha-hdr{padding:10px 12px 8px}
+  .wha-bdg{display:none}
+  .wha-leg{display:none}
+  .wha-ctrl{padding:6px 10px}
+  .wha-cl{width:58px}
+}
+@media (max-width:360px){
+  .wha-t2{display:none}
+}
 </style>
 
 <div class="wha">
 <div class="wha-hdr">
-  <div>
+  <div style="flex:1;min-width:0">
     <div class="wha-t1">WHALE SUPERHIGHWAYS</div>
-    <div class="wha-t2">Atlas interattivo dei corridoi migratori globali — 845+ tag satellitari · 50 ricercatori · 8 specie</div>
+    <div class="wha-t2">Atlas interattivo dei corridoi migratori — 845+ tag satellitari · 8 specie</div>
   </div>
-  <div class="wha-bdg"><div class="wha-b">845+ TAG</div><div class="wha-b">8 SPECIE</div><div class="wha-b">ZOOMABILE</div></div>
+  <div class="wha-bdg"><div class="wha-b">845+ TAG</div><div class="wha-b">8 SPECIE</div></div>
 </div>
-<div class="hint-bar">🖱 SCROLL per zoom · TRASCINA per muoverti · DOPPIO CLICK per zoom in · DOPPIO CLICK destro per zoom out</div>
+<div class="hint-bar" id="hint-bar">🖱 SCROLL per zoom · TRASCINA per muoverti · DOPPIO CLICK per zoom in/out</div>
 <div class="wha-mwrap">
   <svg id="wha-svg" role="img" aria-label="Mappa globale delle rotte migratorie di 8 specie di balene"></svg>
-  <div id="wha-load">⟳ CARICAMENTO MAPPA...</div>
-
+  <div id="wha-load">⟳ CARICAMENTO...</div>
   <div class="zoom-controls">
-    <button class="zoom-btn" id="zin" title="Zoom in">+</button>
+    <button class="zoom-btn" id="zin" aria-label="Zoom in">+</button>
     <div class="zoom-level" id="zlvl">1×</div>
-    <button class="zoom-btn" id="zout" title="Zoom out">−</button>
-    <button class="zoom-btn" id="zrst" title="Reset" style="font-size:11px;letter-spacing:0">⟲</button>
+    <button class="zoom-btn" id="zout" aria-label="Zoom out">−</button>
+    <button class="zoom-btn" id="zrst" aria-label="Reset zoom" style="font-size:13px">⟲</button>
   </div>
-
   <div class="wha-leg">
     <div class="wha-lt">LEGENDA</div>
-    <div class="wha-lr"><svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="5 4"/></svg>Corridoio migrazione</div>
-    <div class="wha-lr"><svg width="11" height="11"><circle cx="5.5" cy="5.5" r="4.5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/></svg>Area alimentazione</div>
-    <div class="wha-lr"><svg width="11" height="11"><circle cx="5.5" cy="5.5" r="4.5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="3 2"/></svg>Area riproduzione</div>
-    <div class="wha-lr" style="display:flex;align-items:center;gap:5px"><svg width="11" height="11"><rect width="11" height="11" rx="1" fill="#8aaa72"/></svg>Terra</div>
-    <div class="wha-lr"><svg width="11" height="11"><rect width="11" height="11" rx="1" fill="#ddeef5"/></svg>Ghiaccio/neve</div>
+    <div class="wha-lr"><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="rgba(255,255,255,0.42)" stroke-width="1.5" stroke-dasharray="5 4"/></svg>Migrazione</div>
+    <div class="wha-lr"><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/></svg>Alimentazione</div>
+    <div class="wha-lr"><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="1" stroke-dasharray="3 2"/></svg>Riproduzione</div>
   </div>
   <div id="wha-tip"></div>
 </div>
@@ -97,6 +117,12 @@
 const MN=['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
 const ALL12=[1,2,3,4,5,6,7,8,9,10,11,12];
 const ICE=new Set([304,10]);
+const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+
+// Update hint bar for touch devices
+if(isTouch){
+  document.getElementById('hint-bar').textContent='👆 PIZZICA per zoom · TRASCINA per muoverti · DOPPIO TAP per zoom in';
+}
 
 const SP=[
   {id:'hump',name:'Humpback Whales',itn:'Megattere',sci:'Megaptera novaeangliae',col:'#FF8C00',iucn:'LC',len:'13–16m',wt:'25–30t',pop:'~84.000',dist:'16.000 km',
@@ -126,18 +152,18 @@ const SP=[
      {n:'S. Oceano',c:[[20,-35],[16,-45],[12,-55],[8,-64]],m:[3,4,5,10,11,12]}
    ],
    areas:[
-     {lat:9,lon:-87,s:'b',l:'DIC–MAR\nBreeding/Sosta\nCosta Rica Dome',m:[12,1,2,3]},
+     {lat:9,lon:-87,s:'b',l:'DIC–MAR\nCosta Rica Dome',m:[12,1,2,3]},
      {lat:36,lon:-122,s:'f',l:'APR–OTT\nFeeding\nCalifornia',m:[4,5,6,7,8,9,10]},
-     {lat:49,lon:-65,s:'f',l:'GIU–OTT\nFeeding\nSt. Lawrence',m:[6,7,8,9,10]},
-     {lat:-65,lon:15,s:'f',l:'DIC–APR\nFeeding\nAntartide',m:[12,1,2,3,4]},
-     {lat:8,lon:82,s:'f',l:'GEN–APR\nSosta\nSri Lanka',m:[1,2,3,4]}
+     {lat:49,lon:-65,s:'f',l:'GIU–OTT\nSt. Lawrence',m:[6,7,8,9,10]},
+     {lat:-65,lon:15,s:'f',l:'DIC–APR\nAntartide',m:[12,1,2,3,4]},
+     {lat:8,lon:82,s:'f',l:'GEN–APR\nSri Lanka',m:[1,2,3,4]}
    ]
   },
   {id:'gray',name:'Gray Whales',itn:'Balene Grigie',sci:'Eschrichtius robustus',col:'#BDBDBD',iucn:'LC',len:'12–14m',wt:'15–35t',pop:'~27.000',dist:'20.000 km',
    routes:[{n:'N. Pacifico',c:[[-114,27],[-117,31],[-121,36],[-125,41],[-129,47],[-136,51],[-144,54],[-152,58],[-160,62],[-165,64],[-168,66]],m:[1,2,3,4,5,10,11,12]}],
    areas:[
      {lat:27,lon:-114,s:'b',l:'DIC–MAR\nBreeding\nBaja California',m:[12,1,2,3]},
-     {lat:65,lon:-168,s:'f',l:'GIU–OTT\nFeeding\nBering/Chukchi Sea',m:[6,7,8,9,10]}
+     {lat:65,lon:-168,s:'f',l:'GIU–OTT\nFeeding\nBering Sea',m:[6,7,8,9,10]}
    ]
   },
   {id:'bowh',name:'Bowhead Whales',itn:'Balene Groenlandia',sci:'Balaena mysticetus',col:'#26C6DA',iucn:'LC',len:'13–15m',wt:'60–100t',pop:'~10.000',dist:'~3.000 km',
@@ -146,15 +172,15 @@ const SP=[
      {n:'Artico Orientale',c:[[-65,70],[-50,72],[-30,75],[-15,78]],m:[4,5,6,7,8,9]}
    ],
    areas:[
-     {lat:62,lon:-170,s:'f',l:'OTT–APR\nInvernale\nBering Sea',m:[10,11,12,1,2,3,4]},
-     {lat:71,lon:-140,s:'f',l:'GIU–SET\nEstivo\nBeaufort Sea',m:[6,7,8,9]}
+     {lat:62,lon:-170,s:'f',l:'OTT–APR\nBering Sea',m:[10,11,12,1,2,3,4]},
+     {lat:71,lon:-140,s:'f',l:'GIU–SET\nBeaufort Sea',m:[6,7,8,9]}
    ]
   },
   {id:'narw',name:'N. Atlantic Right Whale',itn:'Balena franca N. Atlantico',sci:'Eubalaena glacialis',col:'#CE93D8',iucn:'CR',len:'13–16m',wt:'40–70t',pop:'~350',dist:'~2.000 km',
    routes:[{n:'Costa NE America',c:[[-81,30],[-80,32],[-78,35],[-75,37],[-73,40],[-70,42],[-67,44],[-65,45]],m:ALL12}],
    areas:[
      {lat:30,lon:-81,s:'b',l:'NOV–MAR\nCalving\nFlorida/Georgia',m:[11,12,1,2,3]},
-     {lat:44,lon:-67,s:'f',l:'APR–OTT\nFeeding\nBay of Fundy',m:[4,5,6,7,8,9,10]}
+     {lat:44,lon:-67,s:'f',l:'APR–OTT\nBay of Fundy',m:[4,5,6,7,8,9,10]}
    ]
   },
   {id:'srw',name:'Southern Right Whales',itn:'Balene franche Australi',sci:'Eubalaena australis',col:'#EF5350',iucn:'LC',len:'15–18m',wt:'40–80t',pop:'~13.600',dist:'~4.000 km',
@@ -164,10 +190,10 @@ const SP=[
      {n:'Australia',c:[[116,-34],[120,-44],[126,-55],[134,-62],[145,-65]],m:[11,12,1,2,3,4,5]}
    ],
    areas:[
-     {lat:-42,lon:-65,s:'b',l:'GIU–DIC\nBreeding\nPatagonia',m:[6,7,8,9,10,11]},
-     {lat:-34,lon:19,s:'b',l:'GIU–NOV\nBreeding\nHermanus SA',m:[6,7,8,9,10,11]},
-     {lat:-34,lon:116,s:'b',l:'GIU–OTT\nBreeding\nAustralia',m:[6,7,8,9,10]},
-     {lat:-65,lon:0,s:'f',l:'DIC–APR\nFeeding\nAntartide',m:[12,1,2,3,4]}
+     {lat:-42,lon:-65,s:'b',l:'GIU–DIC\nPatagonia',m:[6,7,8,9,10,11]},
+     {lat:-34,lon:19,s:'b',l:'GIU–NOV\nHermanus SA',m:[6,7,8,9,10,11]},
+     {lat:-34,lon:116,s:'b',l:'GIU–OTT\nAustralia',m:[6,7,8,9,10]},
+     {lat:-65,lon:0,s:'f',l:'DIC–APR\nAntartide',m:[12,1,2,3,4]}
    ]
   },
   {id:'sperm',name:'Sperm Whales',itn:'Capodogli',sci:'Physeter macrocephalus',col:'#A1887F',iucn:'VU',len:'11–20m',wt:'15–57t',pop:'~350.000',dist:'Pelagici',
@@ -178,9 +204,9 @@ const SP=[
      {n:'Atlantico — maschi estivi',c:[[-63,17],[-52,25],[-40,34],[-28,44],[-20,52]],m:[4,5,6,7,8,9]}
    ],
    areas:[
-     {lat:43.5,lon:9,s:'f',l:'TUTTO L\'ANNO\nMar Ligure\n(residenti)',m:ALL12},
-     {lat:37.5,lon:18,s:'f',l:'TUTTO L\'ANNO\nMar Ionio\n(residenti)',m:ALL12},
-     {lat:36,lon:-3,s:'f',l:'TUTTO L\'ANNO\nMar di Alboran',m:ALL12},
+     {lat:43.5,lon:9,s:'f',l:'TUTTO L\'ANNO\nMar Ligure',m:ALL12},
+     {lat:37.5,lon:18,s:'f',l:'TUTTO L\'ANNO\nMar Ionio',m:ALL12},
+     {lat:36,lon:-3,s:'f',l:'TUTTO L\'ANNO\nAlboran',m:ALL12},
      {lat:38,lon:-28,s:'f',l:'TUTTO L\'ANNO\nAzzorre',m:ALL12},
      {lat:15,lon:-61,s:'b',l:'TUTTO L\'ANNO\nFemmine+Piccoli',m:ALL12},
      {lat:7,lon:82,s:'f',l:'DIC–APR\nSri Lanka',m:[12,1,2,3,4]},
@@ -195,15 +221,15 @@ const SP=[
      {n:'S. Oceano',c:[[-50,-40],[-45,-52],[-35,-62],[5,-65],[45,-65],[82,-62],[102,-55]],m:[11,12,1,2,3,4]}
    ],
    areas:[
-     {lat:64,lon:-18,s:'f',l:'MAG–SET\nFeeding\nIslanda/Norvegia',m:[5,6,7,8,9]},
-     {lat:-65,lon:20,s:'f',l:'DIC–APR\nFeeding\nAntartide',m:[12,1,2,3,4]},
+     {lat:64,lon:-18,s:'f',l:'MAG–SET\nIslanda/Norvegia',m:[5,6,7,8,9]},
+     {lat:-65,lon:20,s:'f',l:'DIC–APR\nAntartide',m:[12,1,2,3,4]},
      {lat:38,lon:10,s:'f',l:'TUTTO L\'ANNO\nMediterraneo',m:ALL12}
    ]
   }
 ];
 
 let selM=null, selSp=new Set(SP.map(s=>s.id));
-let zoomBeh, svgSel, W, H;
+let zoomBeh, svgSel;
 
 function buildControls(){
   const md=document.getElementById('wha-ms');
@@ -221,7 +247,8 @@ function buildControls(){
   SP.forEach(s=>{
     const b=document.createElement('button');
     b.className='wha-sb'; b.dataset.id=s.id;
-    b.textContent=s.name.replace(' Whales','').replace(' Whale','').toUpperCase();
+    const short=s.name.replace(' Whales','').replace(' Whale','').replace('N. Atlantic Right','N.A. Right').toUpperCase();
+    b.textContent=short;
     b.style.borderColor=s.col; b.style.color=s.col;
     b.onclick=()=>{if(selSp.has(s.id)){selSp.delete(s.id);b.classList.add('mx')}else{selSp.add(s.id);b.classList.remove('mx')}upd()};
     sd.appendChild(b);
@@ -253,14 +280,9 @@ function upd(){
       const sid=el.getAttribute('data-sp');
       const ms=JSON.parse(el.getAttribute('data-m')||'[]');
       const ok=selSp.has(sid)&&(selM===null||ms.includes(selM));
-      el.style.transition='opacity 0.3s';
-      el.style.opacity=ok?'1':'0';
+      el.style.transition='opacity 0.3s'; el.style.opacity=ok?'1':'0';
     });
   });
-}
-
-function updateZoomLevel(k){
-  document.getElementById('zlvl').textContent=k.toFixed(1)+'×';
 }
 
 async function renderMap(){
@@ -270,8 +292,10 @@ async function renderMap(){
   document.getElementById('wha-load').style.display='none';
 
   const wrap=document.querySelector('.wha-mwrap');
-  W=wrap.clientWidth||680;
-  H=Math.round(W*0.51);
+  const W=wrap.clientWidth||380;
+  // Taller ratio on mobile for better visibility
+  const isMobile=W<600;
+  const H=Math.round(W*(isMobile?0.70:0.51));
 
   svgSel=d3.select('#wha-svg')
     .attr('viewBox',`0 0 ${W} ${H}`)
@@ -282,47 +306,34 @@ async function renderMap(){
   const path=d3.geoPath().projection(proj);
   const grat=d3.geoGraticule().step([20,20]);
 
-  // Defs
   const defs=svgSel.append('defs');
-  const og=defs.append('radialGradient').attr('id','og2').attr('cx','50%').attr('cy','48%').attr('r','55%');
+  const og=defs.append('radialGradient').attr('id','og3').attr('cx','50%').attr('cy','48%').attr('r','55%');
   og.append('stop').attr('offset','0%').attr('stop-color','#2a6a9a');
   og.append('stop').attr('offset','55%').attr('stop-color','#1a4e7a');
   og.append('stop').attr('offset','100%').attr('stop-color','#0e2e50');
 
-  // Static ocean background (outside zoomable group, always covers full SVG)
-  svgSel.append('rect').attr('width',W).attr('height',H).attr('fill','url(#og2)');
-
-  // Zoomable group — all map content goes here
+  svgSel.append('rect').attr('width',W).attr('height',H).attr('fill','url(#og3)');
   const g=svgSel.append('g').attr('id','zoom-g');
-
-  // Sphere ocean fill inside zoom group
-  g.append('path').datum({type:'Sphere'}).attr('d',path).attr('fill','url(#og2)');
+  g.append('path').datum({type:'Sphere'}).attr('d',path).attr('fill','url(#og3)');
   g.append('path').datum(grat()).attr('d',path).attr('fill','none').attr('stroke','rgba(255,255,255,0.07)').attr('stroke-width',0.4);
 
-  // Countries
   const ctrs=topojson.feature(world,world.objects.countries);
   g.append('g').selectAll('path').data(ctrs.features).enter().append('path')
-    .attr('d',path)
-    .attr('fill',d=>ICE.has(+d.id)?'#ddeef5':'#8aaa72')
+    .attr('d',path).attr('fill',d=>ICE.has(+d.id)?'#ddeef5':'#8aaa72')
     .attr('stroke','#5a7a48').attr('stroke-width',0.35);
-
   g.append('path').datum(topojson.mesh(world,world.objects.countries,(a,b)=>a!==b))
     .attr('d',path).attr('fill','none').attr('stroke','rgba(60,90,40,0.5)').attr('stroke-width',0.25);
-
   g.append('path').datum({type:'Sphere'}).attr('d',path).attr('fill','none')
     .attr('stroke','rgba(100,180,220,0.35)').attr('stroke-width',1.2);
 
-  // Ocean labels
-  const oceans=[
-    {t:'PACIFICO',lon:-150,lat:5},{t:'ATLANTICO',lon:-28,lat:5},{t:'INDIANO',lon:75,lat:-22},
-    {t:'ARTICO',lon:0,lat:83},{t:'ANTARTICO',lon:10,lat:-58},{t:'PACIFICO',lon:165,lat:-30}
-  ];
-  const fs=Math.max(7,W/118);
+  // Ocean labels — hidden on small mobile, visible when zoomed
+  const fs=Math.max(6,W/130);
+  const oceans=[{t:'PACIFICO',lon:-150,lat:5},{t:'ATLANTICO',lon:-28,lat:5},{t:'INDIANO',lon:75,lat:-22},{t:'ARTICO',lon:0,lat:83},{t:'ANTARTICO',lon:10,lat:-58},{t:'PACIFICO',lon:165,lat:-30}];
   oceans.forEach(o=>{
     const pt=proj([o.lon,o.lat]); if(!pt)return;
     g.append('text').attr('x',pt[0]).attr('y',pt[1]).attr('text-anchor','middle')
-      .attr('fill','rgba(220,240,255,0.18)').attr('font-size',fs+'px')
-      .attr('font-family','Barlow Condensed,sans-serif').attr('font-weight','300').attr('letter-spacing','4').text(o.t);
+      .attr('fill','rgba(220,240,255,0.16)').attr('font-size',fs+'px')
+      .attr('font-family','Barlow Condensed,sans-serif').attr('font-weight','300').attr('letter-spacing','3').text(o.t);
   });
 
   // Whale areas
@@ -331,9 +342,9 @@ async function renderMap(){
       const circ=d3.geoCircle().center([a.lon,a.lat]).radius(4.5)();
       g.append('path').datum(circ).attr('d',path)
         .attr('class',`wh-area wh-a-${s.id}`).attr('data-sp',s.id).attr('data-m',JSON.stringify(a.m))
-        .attr('fill',s.col).attr('fill-opacity',0.14)
-        .attr('stroke',s.col).attr('stroke-opacity',a.s==='b'?0.55:0.35)
-        .attr('stroke-width',1.2).attr('stroke-dasharray',a.s==='b'?'4 3':'none');
+        .attr('fill',s.col).attr('fill-opacity',0.14).attr('stroke',s.col)
+        .attr('stroke-opacity',a.s==='b'?0.55:0.35).attr('stroke-width',1.2)
+        .attr('stroke-dasharray',a.s==='b'?'4 3':'none');
     });
   });
 
@@ -346,28 +357,30 @@ async function renderMap(){
         .attr('stroke',s.col).attr('stroke-width',5).attr('stroke-opacity',0.12);
       g.append('path').datum(feat).attr('d',path)
         .attr('class',`wh-rt wh-r-${s.id}`).attr('data-sp',s.id).attr('data-m',JSON.stringify(r.m))
-        .attr('data-n',r.n).attr('stroke',s.col).attr('stroke-width',1.6).attr('stroke-opacity',0.9)
+        .attr('stroke',s.col).attr('stroke-width',1.6).attr('stroke-opacity',0.9)
         .style('animation-delay',(ri*0.5)+'s')
-        .on('mouseenter',function(ev){
+        .on('mouseenter touchstart',function(ev){
+          if(ev.type==='touchstart') ev.preventDefault();
           const [mx,my]=d3.pointer(ev,wrap);
           const tip=document.getElementById('wha-tip');
-          tip.innerHTML=`<strong style="color:${s.col};font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.5px">${s.name}</strong><span style="display:block;margin-bottom:2px">${r.n}</span><span style="color:#4a6070;font-size:8.5px">${s.itn} · Attivo: ${r.m.map(m=>MN[m-1]).join(', ')}</span>`;
-          tip.style.display='block'; tip.style.left=(mx+12)+'px'; tip.style.top=(my-10)+'px';
+          tip.innerHTML=`<strong style="color:${s.col};font-family:'Barlow Condensed',sans-serif;font-size:10.5px">${s.name}</strong><span style="display:block;margin-bottom:1px">${r.n}</span><span style="color:#4a6070;font-size:8px">${MN.filter((_,i)=>r.m.includes(i+1)).join(', ')}</span>`;
+          tip.style.display='block'; tip.style.left=Math.min(mx+10,W-180)+'px'; tip.style.top=Math.max(my-50,4)+'px';
           d3.select(this).attr('stroke-opacity',1).attr('stroke-width',2.8);
         })
         .on('mousemove',function(ev){
           const [mx,my]=d3.pointer(ev,wrap);
-          const t=document.getElementById('wha-tip'); t.style.left=(mx+12)+'px'; t.style.top=(my-10)+'px';
+          const t=document.getElementById('wha-tip');
+          t.style.left=Math.min(mx+10,W-180)+'px'; t.style.top=Math.max(my-50,4)+'px';
         })
-        .on('mouseleave',function(){
-          document.getElementById('wha-tip').style.display='none';
+        .on('mouseleave touchend',function(){
+          setTimeout(()=>{ document.getElementById('wha-tip').style.display='none'; },isTouch?1200:0);
           d3.select(this).attr('stroke-opacity',0.9).attr('stroke-width',1.6);
         });
     });
   });
 
   // Labels
-  const lfs=Math.max(6,W/158);
+  const lfs=Math.max(5.5,W/165);
   SP.forEach(s=>{
     s.areas.forEach(a=>{
       const pt=proj([a.lon,a.lat]); if(!pt)return;
@@ -375,83 +388,79 @@ async function renderMap(){
       const gr=g.append('g').attr('class',`wh-lbl wh-l-${s.id}`).attr('data-sp',s.id).attr('data-m',JSON.stringify(a.m))
         .attr('transform',`translate(${pt[0]},${pt[1]})`);
       const lh=lfs*1.35, mxl=Math.max(...lines.map(x=>x.length));
-      const rw=mxl*lfs*0.62+8, rh=lines.length*lh+5;
-      gr.append('rect').attr('x',-rw/2).attr('y',-rh-lh*0.15).attr('width',rw).attr('height',rh)
+      const rw=mxl*lfs*0.62+7, rh=lines.length*lh+4;
+      gr.append('rect').attr('x',-rw/2).attr('y',-rh-lh*0.1).attr('width',rw).attr('height',rh)
         .attr('fill','rgba(5,15,28,0.82)').attr('rx',2);
       lines.forEach((line,i)=>{
         gr.append('text').attr('x',0).attr('y',-rh+lh*(i+0.82))
-          .attr('text-anchor','middle').attr('fill',i===0?s.col:'rgba(200,220,240,0.6)')
+          .attr('text-anchor','middle').attr('fill',i===0?s.col:'rgba(200,220,240,0.55)')
           .attr('font-size',(i===0?lfs+0.5:lfs)+'px').attr('font-family','Barlow Condensed,sans-serif')
-          .attr('font-weight',i===0?'700':'400').attr('letter-spacing','0.4').text(line);
+          .attr('font-weight',i===0?'700':'400').attr('letter-spacing','0.3').text(line);
       });
     });
   });
 
-  // =====================
-  // ZOOM BEHAVIOR
-  // =====================
-  const identity=d3.zoomIdentity;
-
-  zoomBeh=d3.zoom()
-    .scaleExtent([1, 14])
-    .translateExtent([[0,0],[W,H]])
-    .on('zoom', (event)=>{
-      const t=event.transform;
-      g.attr('transform', t);
-      // Scale stroke-width inversely so routes don't get too thick when zoomed
-      const k=t.k;
-      g.selectAll('.wh-rt').attr('stroke-width', 1.6/Math.sqrt(k));
-      g.selectAll('.wh-gl').attr('stroke-width', 5/Math.sqrt(k));
-      g.selectAll('.wh-area').attr('stroke-width', 1.2/Math.sqrt(k));
-      // Scale labels inversely so they stay readable
-      g.selectAll('.wh-lbl').attr('transform', function(){
-        const orig=d3.select(this).attr('data-orig-transform')||d3.select(this).attr('transform');
-        d3.select(this).attr('data-orig-transform', orig);
-        const match=orig.match(/translate\(([^,]+),([^)]+)\)/);
-        if(!match)return orig;
-        return `translate(${match[1]},${match[2]}) scale(${1/k})`;
+  // ===================== ZOOM =====================
+  zoomBeh=d3.zoom().scaleExtent([1,14]).translateExtent([[0,0],[W,H]])
+    .on('zoom',(event)=>{
+      const t=event.transform, k=t.k;
+      g.attr('transform',t);
+      g.selectAll('.wh-rt').attr('stroke-width',1.6/Math.sqrt(k));
+      g.selectAll('.wh-gl').attr('stroke-width',5/Math.sqrt(k));
+      g.selectAll('.wh-area').attr('stroke-width',1.2/Math.sqrt(k));
+      g.selectAll('.wh-lbl').each(function(){
+        const el=d3.select(this);
+        const ot=el.attr('data-orig')||(el.attr('data-orig',el.attr('transform')),el.attr('transform'));
+        const m=ot.match(/translate\(([^,]+),([^)]+)\)/);
+        if(m) el.attr('transform',`translate(${m[1]},${m[2]}) scale(${1/k})`);
       });
-      updateZoomLevel(k);
+      document.getElementById('zlvl').textContent=k.toFixed(1)+'×';
     });
 
-  // Double-click LEFT → zoom in 2× centered on click
-  svgSel.on('dblclick', function(event){
-    event.preventDefault();
-    const [mx,my]=d3.pointer(event);
-    const curT=d3.zoomTransform(svgSel.node());
-    const newK=Math.min(curT.k*2, 14);
-    const tx=mx - newK*(mx-curT.x)/curT.k;
-    const ty=my - newK*(my-curT.y)/curT.k;
-    svgSel.transition().duration(500)
-      .call(zoomBeh.transform, d3.zoomIdentity.translate(tx,ty).scale(newK));
+  // Double-click / double-tap zoom
+  let lastTap=0;
+  svgSel.on('dblclick',function(ev){
+    ev.preventDefault();
+    const [mx,my]=d3.pointer(ev);
+    const cur=d3.zoomTransform(svgSel.node());
+    const nk=Math.min(cur.k*2,14);
+    svgSel.transition().duration(420).call(zoomBeh.transform,
+      d3.zoomIdentity.translate(mx-nk*(mx-cur.x)/cur.k, my-nk*(my-cur.y)/cur.k).scale(nk));
+  });
+  svgSel.on('touchend',function(ev){
+    const now=Date.now();
+    if(now-lastTap<320){
+      ev.preventDefault();
+      const t=ev.changedTouches[0];
+      const rect=svgSel.node().getBoundingClientRect();
+      const mx=t.clientX-rect.left, my=t.clientY-rect.top;
+      const cur=d3.zoomTransform(svgSel.node());
+      const nk=Math.min(cur.k*2,14);
+      svgSel.transition().duration(420).call(zoomBeh.transform,
+        d3.zoomIdentity.translate(mx-nk*(mx-cur.x)/cur.k, my-nk*(my-cur.y)/cur.k).scale(nk));
+    }
+    lastTap=now;
+  });
+  svgSel.on('contextmenu',function(ev){
+    ev.preventDefault();
+    const [mx,my]=d3.pointer(ev);
+    const cur=d3.zoomTransform(svgSel.node());
+    const nk=Math.max(cur.k/2,1);
+    svgSel.transition().duration(420).call(zoomBeh.transform,
+      d3.zoomIdentity.translate(mx-nk*(mx-cur.x)/cur.k, my-nk*(my-cur.y)/cur.k).scale(nk));
   });
 
-  // Double-click RIGHT → zoom out 2×
-  svgSel.on('contextmenu', function(event){
-    event.preventDefault();
-    const [mx,my]=d3.pointer(event);
-    const curT=d3.zoomTransform(svgSel.node());
-    const newK=Math.max(curT.k/2, 1);
-    const tx=mx - newK*(mx-curT.x)/curT.k;
-    const ty=my - newK*(my-curT.y)/curT.k;
-    svgSel.transition().duration(500)
-      .call(zoomBeh.transform, d3.zoomIdentity.translate(tx,ty).scale(newK));
+  svgSel.call(zoomBeh).on('dblclick.zoom',null);
+
+  document.getElementById('zin').onclick=()=>svgSel.transition().duration(350).call(zoomBeh.scaleBy,1.8);
+  document.getElementById('zout').onclick=()=>svgSel.transition().duration(350).call(zoomBeh.scaleBy,1/1.8);
+  document.getElementById('zrst').onclick=()=>svgSel.transition().duration(600).call(zoomBeh.transform,d3.zoomIdentity);
+
+  // Resize handler
+  window.addEventListener('resize',()=>{
+    const nW=wrap.clientWidth;
+    if(Math.abs(nW-W)>20){ location.reload(); } // simple reload on significant resize
   });
-
-  svgSel.call(zoomBeh);
-  // Disable default double-click zoom (we handle it manually above)
-  svgSel.on('dblclick.zoom', null);
-
-  // Zoom buttons
-  document.getElementById('zin').onclick=()=>{
-    svgSel.transition().duration(350).call(zoomBeh.scaleBy, 1.8);
-  };
-  document.getElementById('zout').onclick=()=>{
-    svgSel.transition().duration(350).call(zoomBeh.scaleBy, 1/1.8);
-  };
-  document.getElementById('zrst').onclick=()=>{
-    svgSel.transition().duration(600).call(zoomBeh.transform, identity);
-  };
 }
 
 buildControls(); buildCards(); renderMap();
